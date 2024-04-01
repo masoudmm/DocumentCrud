@@ -4,28 +4,32 @@ public class Invoice : AccountingDocument
 {
     private readonly HashSet<DependentCreditNote> _dependentCreditNotes;
 
+    public string ExternalInvoiceNumber { get; private set; }
+
     public IReadOnlyList<DependentCreditNote> DependentCreditNotes => _dependentCreditNotes.ToList();
 
+    private Invoice() { }
+
     private Invoice(string number,
-        string externalNumber,
+        string externalInvoiceNumber,
         AccountingDocumentStatus status,
         decimal totalAmount) 
     {
         Number = number;
-        ExternalNumber = externalNumber;
+        ExternalInvoiceNumber = externalInvoiceNumber;
         Status = status;
         TotalAmount = totalAmount;
     }
 
     public void Edit(string number,
-        string externalNumber,
+        string externalInvoiceNumber,
         AccountingDocumentStatus status, 
         decimal totalAmount)
     {
         //We can check some business rules and create events here
 
         Number = number;
-        ExternalNumber = externalNumber;
+        ExternalInvoiceNumber = externalInvoiceNumber;
         Status = status;
         TotalAmount = totalAmount;
     }

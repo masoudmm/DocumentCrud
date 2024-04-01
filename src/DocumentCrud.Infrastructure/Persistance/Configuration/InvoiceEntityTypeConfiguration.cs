@@ -23,17 +23,17 @@ public class InvoiceEntityTypeConfiguration : IEntityTypeConfiguration<Invoice>
         builder.ToTable(c =>
         {
             c.HasCheckConstraint($"CK_Invoice_{nameof(Invoice.Number)}_OnlyDigits",
-                $"{nameof(Invoice.Number)} ~ '^[0-9]+$'");
+                $"{nameof(Invoice.Number)} NOT LIKE '%[^0-9]%'");
 
-            c.HasCheckConstraint($"CK_Invoice_{nameof(Invoice.ExternalNumber)}_Alphanumeric",
-                $"CHECK ({nameof(Invoice.ExternalNumber)} ~ '^[A-Za-z0-9]+$')");
+            c.HasCheckConstraint($"CK_Invoice_{nameof(Invoice.ExternalInvoiceNumber)}_Alphanumeric",
+                $"{nameof(Invoice.ExternalInvoiceNumber)} NOT LIKE '%[^A-Za-z0-9]%'");
 
             c.HasCheckConstraint($"CK_Invoice_{nameof(Invoice.TotalAmount)}_Greater_Then_Zero",
-                $"CHECK ({nameof(Invoice.TotalAmount)} > 0");
+                $"{nameof(Invoice.TotalAmount)} > 0");
         });
 
 
-        builder.Property(c => c.ExternalNumber)
+        builder.Property(c => c.ExternalInvoiceNumber)
             .HasMaxLength(10)
             .IsRequired();
 

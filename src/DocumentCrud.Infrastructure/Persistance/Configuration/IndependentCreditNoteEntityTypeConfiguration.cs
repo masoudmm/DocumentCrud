@@ -8,7 +8,7 @@ public class IndependentCreditNoteEntityTypeConfiguration : IEntityTypeConfigura
 {
     public void Configure(EntityTypeBuilder<IndependentCreditNote> builder)
     {
-        builder.ToTable("Invoices");
+        builder.ToTable("IndependentCreditNotes");
 
         builder.HasKey(c => c.Id)
             .IsClustered();
@@ -23,17 +23,17 @@ public class IndependentCreditNoteEntityTypeConfiguration : IEntityTypeConfigura
         builder.ToTable(c =>
         {
             c.HasCheckConstraint($"CK_IndependentCreditNote_{nameof(IndependentCreditNote.Number)}_OnlyDigits",
-                $"{nameof(IndependentCreditNote.Number)} ~ '^[0-9]+$'");
+                $"{nameof(IndependentCreditNote.Number)} NOT LIKE '%[^0-9]%'");
 
-            c.HasCheckConstraint($"CK_IndependentCreditNote_{nameof(IndependentCreditNote.ExternalNumber)}_Alphanumeric",
-                $"CHECK ({nameof(IndependentCreditNote.ExternalNumber)} ~ '^[A-Za-z0-9]+$')");
+            c.HasCheckConstraint($"CK_IndependentCreditNote_{nameof(IndependentCreditNote.ExternalCreditNumber)}_Alphanumeric",
+                $"{nameof(IndependentCreditNote.ExternalCreditNumber)} NOT LIKE '%[^A-Za-z0-9]%'");
 
             c.HasCheckConstraint($"CK_IndependentCreditNote_{nameof(IndependentCreditNote.TotalAmount)}_Greater_Then_Zero",
-                $"CHECK ({nameof(IndependentCreditNote.TotalAmount)} < 0");
+                $"{nameof(IndependentCreditNote.TotalAmount)} < 0");
         });
 
 
-        builder.Property(c => c.ExternalNumber)
+        builder.Property(c => c.ExternalCreditNumber)
             .HasMaxLength(10)
             .IsRequired();
 

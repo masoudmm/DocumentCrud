@@ -1,27 +1,27 @@
 ﻿namespace DocumentCrud.Domain.Entities;
 
-public class IndependentCreditNote : AccountingDocument
+public class IndependentCreditNote : CreditDocument
 {
     private IndependentCreditNote(string number,
-        string externalNumber,
+        string externalCreditNumber,
         AccountingDocumentStatus status,
         decimal totalAmount)
     {
         Number = number;
-        ExternalNumber = externalNumber;
+        ExternalCreditNumber = externalCreditNumber;
         Status = status;
         TotalAmount = totalAmount;
     }
 
     public void Edit(string number,
-        string externalNumber,
+        string externalCreditNumber,
         AccountingDocumentStatus status,
         decimal totalAmount)
     {
         //We can check some business rules and create events here
 
         Number = number;
-        ExternalNumber = externalNumber;
+        ExternalCreditNumber = externalCreditNumber;
         Status = status;
         TotalAmount = totalAmount;
     }

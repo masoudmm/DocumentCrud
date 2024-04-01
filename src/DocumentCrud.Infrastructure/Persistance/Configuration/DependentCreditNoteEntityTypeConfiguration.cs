@@ -8,7 +8,7 @@ public class DependentCreditNoteEntityTypeConfiguration : IEntityTypeConfigurati
 {
     public void Configure(EntityTypeBuilder<DependentCreditNote> builder)
     {
-        builder.ToTable("Credits");
+        builder.ToTable("DependentCreditNotes");
 
         builder.HasKey(c => c.Id)
             .IsClustered();
@@ -23,20 +23,17 @@ public class DependentCreditNoteEntityTypeConfiguration : IEntityTypeConfigurati
         builder.ToTable(c =>
         {
             c.HasCheckConstraint($"CK_DependentCreditNote_{nameof(DependentCreditNote.Number)}_OnlyDigits",
-                $"{nameof(DependentCreditNote.Number)} ~ '^[0-9]+$'");
+                $"{nameof(DependentCreditNote.Number)} NOT LIKE '%[^0-9]%'");
 
-            c.HasCheckConstraint($"CK_DependentCreditNote_{nameof(DependentCreditNote.ExternalNumber)}_OnlyDigits",
-                $"{nameof(DependentCreditNote.Number)} ~ '^[0-9]+$'");
-
-            c.HasCheckConstraint($"CK_DependentCreditNote_{nameof(DependentCreditNote.ExternalNumber)}_Alphanumeric",
-                $"CHECK ({nameof(DependentCreditNote.ExternalNumber)} ~ '^[A-Za-z0-9]+$')");
+            c.HasCheckConstraint($"CK_DependentCreditNote_{nameof(DependentCreditNote.ExternalCreditNumber)}_Alphanumeric",
+                $"{nameof(DependentCreditNote.ExternalCreditNumber)} NOT LIKE '%[^A-Za-z0-9]%'");
 
             c.HasCheckConstraint($"CK_DependentCreditNote_{nameof(DependentCreditNote.TotalAmount)}_Greater_Then_Zero",
-                $"CHECK ({nameof(DependentCreditNote.TotalAmount)} < 0");
+                $"{nameof(DependentCreditNote.TotalAmount)} < 0");
         });
 
 
-        builder.Property(c => c.ExternalNumber)
+        builder.Property(c => c.ExternalCreditNumber)
             .HasMaxLength(10)
             .IsRequired();
 

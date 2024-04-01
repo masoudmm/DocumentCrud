@@ -1,20 +1,24 @@
 ﻿namespace DocumentCrud.Domain.Entities;
 
-public class DependentCreditNote : AccountingDocument
+public class DependentCreditNote : CreditDocument
 {
     public int ParentInvoiceId { get; private set; }
     public Invoice ParentInvoice { get; private set; }
 
     public string ParentInvoiceNumber => ParentInvoice.Number;
 
+    private DependentCreditNote()
+    {
+    }
+
     private DependentCreditNote(string number,
-        string externalNumber,
+        string externalCreditNumber,
         AccountingDocumentStatus status,
         decimal totalAmount,
-        Invoice parentInvoice)
+        Invoice parentInvoice) : base()
     {
         Number = number;
-        ExternalNumber = externalNumber;
+        ExternalCreditNumber = externalCreditNumber;
         Status = status;
         TotalAmount = totalAmount;
         ParentInvoice = parentInvoice;
@@ -37,7 +41,7 @@ public class DependentCreditNote : AccountingDocument
     //}
 
     public static DependentCreditNote CreateNew(string number,
-        string externalNumber,
+        string externalCreditNumber,
         AccountingDocumentStatus status,
         decimal totalAmount,
         Invoice parentInvoice)
@@ -45,7 +49,7 @@ public class DependentCreditNote : AccountingDocument
         //We can check some business rules and create events here
 
         return new DependentCreditNote(number,
-        externalNumber,
+        externalCreditNumber,
         status,
         totalAmount,
         parentInvoice);
