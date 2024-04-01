@@ -18,18 +18,6 @@ internal class InvoiceRepository : IInvoiceRepository
             .AddAsync(entity);
     }
 
-    public async Task AddDependentCreditNoteAsync(Invoice invoice,
-        string number,
-        string externalNumber,
-        AccountingDocumentStatus status,
-        decimal totalAmount)
-    {
-        invoice.AddDependentCredit(number,
-        externalNumber,
-        status,
-        totalAmount);
-    }
-
     public async Task<List<Invoice>> GetAllAsync()
     {
         return await _context.Invoices
@@ -42,21 +30,25 @@ internal class InvoiceRepository : IInvoiceRepository
             .FirstAsync( i => i.Id == id);
     }
 
-    public void Remove(Invoice entity)
+    public int Remove(Invoice entity)
     {
-        _context.Invoices
+        var invoice = _context.Invoices
             .Remove(entity);
+
+        return invoice.Entity
+            .Id;
     }
 
-    public async Task Update(Invoice entity)
+    public async Task Update(Invoice invoice)
     {
-        var invoice = await _context.Invoices
+        var invoiceToBeUpdated = await _context.Invoices
             .Include(i => i.DependentCreditNotes)
-            .FirstAsync(i => i.Id == entity.Id);
+            .FirstAsync(i => i.Id == invoice.Id);
 
-        invoice.Edit(invoice.Number,
+        invoiceToBeUpdated.Edit(invoice.Number,
             invoice.ExternalInvoiceNumber,
             invoice.Status,
-            invoice.TotalAmount);
+            invoice.TotalAmount,
+            invoice.DependentCreditNotes);
     }
 }

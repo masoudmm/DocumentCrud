@@ -13,26 +13,30 @@ public class Invoice : AccountingDocument
     private Invoice(string number,
         string externalInvoiceNumber,
         AccountingDocumentStatus status,
-        decimal totalAmount) 
+        decimal totalAmount) : base()
     {
         Number = number;
         ExternalInvoiceNumber = externalInvoiceNumber;
         Status = status;
         TotalAmount = totalAmount;
-        _dependentCreditNotes = new HashSet<DependentCreditNote>();
+        _dependentCreditNotes = [];
     }
 
     public void Edit(string number,
         string externalInvoiceNumber,
         AccountingDocumentStatus status, 
-        decimal totalAmount)
+        decimal totalAmount,
+        IReadOnlyList<DependentCreditNote> dependentCreditNotes)
     {
-        //We can check some business rules and create events here
-
         Number = number;
         ExternalInvoiceNumber = externalInvoiceNumber;
         Status = status;
         TotalAmount = totalAmount;
+
+        foreach (var dependentCreditNote in dependentCreditNotes)
+        {
+            _dependentCreditNotes.Add(dependentCreditNote);
+        }
     }
 
     public void AddDependentCredit(string number,
@@ -59,6 +63,11 @@ public class Invoice : AccountingDocument
 
 
         //TODO: edit the dependent credit
+    }
+
+    public void Delete()
+    {
+        _dependentCreditNotes.Clear();
     }
 
     public static Invoice CreateNewInvoice(string number,

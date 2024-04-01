@@ -31,10 +31,13 @@ internal class IndependentCreditRepository : IIndependentCreditRepository
             .FirstAsync(i => i.Id == id);
     }
 
-    public void Remove(IndependentCreditNote entity)
+    public int Remove(IndependentCreditNote credit)
     {
-        _context.IndependentCreditNotes
-            .Remove(entity);
+        var removedCredit = _context.IndependentCreditNotes
+            .Remove(credit);
+
+        return removedCredit.Entity
+            .Id;
     }
 
     public async Task Update(IndependentCreditNote entity)
