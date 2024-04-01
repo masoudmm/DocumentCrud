@@ -19,6 +19,7 @@ public class Invoice : AccountingDocument
         ExternalInvoiceNumber = externalInvoiceNumber;
         Status = status;
         TotalAmount = totalAmount;
+        _dependentCreditNotes = new HashSet<DependentCreditNote>();
     }
 
     public void Edit(string number,
