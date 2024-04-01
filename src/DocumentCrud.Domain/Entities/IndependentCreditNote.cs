@@ -38,4 +38,8 @@ public class IndependentCreditNote : CreditDocument
         status,
         totalAmount);
     }
+
+    public void Delete()
+    {
+    }
 }
