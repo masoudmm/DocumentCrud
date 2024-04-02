@@ -9,7 +9,7 @@ namespace DocumentCrud.Application.Features.Commands.Edit;
 
 public record EditIndependentCreditCommand(int Id,
     string Number,
-    string ExternalInvoiceNumber,
+    string ExternalCreditNumber,
     AccountingDocumentStatus Status,
     decimal TotalAmount) : IRequest<DocumentDto>;
 
@@ -33,12 +33,12 @@ public class EditIndependentCreditCommandHandler : IRequestHandler<EditIndepende
             .GetByIdAsync(request.Id);
         if (independentCreditNoteToEdit is null)
         {
-            throw new DbEntityNotFoundException("Invoice",
+            throw new DbEntityNotFoundException("ExternalCreditNumber",
                 request.Id);
         }
 
         independentCreditNoteToEdit.Edit(request.Number,
-            request.ExternalInvoiceNumber,
+            request.ExternalCreditNumber,
             request.Status,
             request.TotalAmount);
 

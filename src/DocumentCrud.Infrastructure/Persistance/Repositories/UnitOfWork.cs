@@ -1,4 +1,5 @@
 ﻿using DocumentCrud.Domain.Contracts.Persistence;
+using DocumentCrud.Domain.Contracts.Persistence.Repositories;
 
 namespace DocumentCrud.Infrastructure.Persistance.Repositories;
 

@@ -1,6 +1,8 @@
-﻿namespace DocumentCrud.Domain.Entities;
+﻿using System.Diagnostics.CodeAnalysis;
 
-public class Invoice : AccountingDocument
+namespace DocumentCrud.Domain.Entities;
+
+public class Invoice : AccountingDocument, IAggregateRoot
 {
     private readonly HashSet<DependentCreditNote> _dependentCreditNotes;
 
@@ -59,10 +61,12 @@ public class Invoice : AccountingDocument
         AccountingDocumentStatus status,
         decimal totalAmount)
     {
-        var dependentCreditToEdit = DependentCreditNotes.First(x => x.Id == id);
+        var dependentCreditToEdit = _dependentCreditNotes.First(x => x.Id == id);
 
-
-        //TODO: edit the dependent credit
+        dependentCreditToEdit.Edit(number,
+            externalNumber,
+            status, 
+            totalAmount);
     }
 
     public void Delete()
@@ -70,7 +74,7 @@ public class Invoice : AccountingDocument
         _dependentCreditNotes.Clear();
     }
 
-    public static Invoice CreateNewInvoice(string number,
+    public static Invoice CreateNew(string number,
         string externalNumber,
         AccountingDocumentStatus status,
         decimal totalAmount)

@@ -7,7 +7,7 @@ using MediatR;
 namespace DocumentCrud.Application.Features.Commands.Create;
 
 public record CreateIndependentCreditCommand(string Number,
-        string ExternalInvoiceNumber,
+        string ExternalCreditNumber,
         AccountingDocumentStatus Status,
         decimal TotalAmount) : IRequest<DocumentDto>;
 
@@ -23,21 +23,21 @@ public class CreateIndependentCreditCommandHandler : IRequestHandler<CreateIndep
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<DocumentDto> Handle(CreateIndependentCreditCommand invoice,
+    public async Task<DocumentDto> Handle(CreateIndependentCreditCommand request,
         CancellationToken cancellationToken)
     {
-        ArgumentNullException.ThrowIfNull(invoice, nameof(invoice));
+        ArgumentNullException.ThrowIfNull(request, nameof(request));
 
-        var newInvoice = Invoice.CreateNewInvoice(invoice.Number,
-        invoice.ExternalInvoiceNumber,
-        invoice.Status,
-        invoice.TotalAmount);
+        var newCredit = IndependentCreditNote.CreateNew(request.Number,
+            request.ExternalCreditNumber,
+            request.Status,
+            request.TotalAmount);
 
-        await _unitOfWork.Invoices
-            .AddAsync(newInvoice);
+        await _unitOfWork.IndependentCreditNotes
+            .AddAsync(newCredit);
 
         await _unitOfWork.CommitAsync();
 
-        return _mapper.Map<DocumentDto>(newInvoice);
+        return _mapper.Map<DocumentDto>(newCredit);
     }
 }

@@ -1,4 +1,4 @@
-﻿using DocumentCrud.Domain.Contracts.Persistence;
+﻿using DocumentCrud.Domain.Contracts.Persistence.Repositories;
 using DocumentCrud.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 namespace DocumentCrud.Infrastructure.Persistance.Repositories;

@@ -1,5 +1,6 @@
 ﻿using DocumentCrud.Application.Common;
 using DocumentCrud.Domain.Contracts.Persistence;
+using DocumentCrud.Domain.Contracts.Persistence.Repositories;
 using DocumentCrud.Infrastructure.Persistance;
 using DocumentCrud.Infrastructure.Persistance.Repositories;
 using Microsoft.EntityFrameworkCore;

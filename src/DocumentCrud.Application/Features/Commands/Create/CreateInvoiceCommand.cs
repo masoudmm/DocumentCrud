@@ -24,17 +24,17 @@ public class CreateInvoiceCommandHandler : IRequestHandler<CreateInvoiceCommand,
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<DocumentDto> Handle(CreateInvoiceCommand invoice,
+    public async Task<DocumentDto> Handle(CreateInvoiceCommand request,
         CancellationToken cancellationToken)
     {
-        ArgumentNullException.ThrowIfNull(invoice, nameof(invoice));
+        ArgumentNullException.ThrowIfNull(request, nameof(request));
 
-        var newInvoice = Invoice.CreateNewInvoice(invoice.Number,
-        invoice.ExternalInvoiceNumber,
-        invoice.Status,
-        invoice.TotalAmount);
+        var newInvoice = Invoice.CreateNew(request.Number,
+        request.ExternalInvoiceNumber,
+        request.Status,
+        request.TotalAmount);
 
-        foreach (var dependentCredit in invoice.DependentCreditNotes)
+        foreach (var dependentCredit in request.DependentCreditNotes)
         {
             newInvoice.AddDependentCredit(dependentCredit.Number,
                 dependentCredit.ExternalCreditNumber,

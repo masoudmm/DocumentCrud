@@ -1,6 +1,6 @@
 ﻿namespace DocumentCrud.Domain.Entities;
 
-public class IndependentCreditNote : CreditDocument
+public class IndependentCreditNote : CreditDocument, IAggregateRoot
 {
     private IndependentCreditNote(string number,
         string externalCreditNumber,
@@ -26,7 +26,7 @@ public class IndependentCreditNote : CreditDocument
         TotalAmount = totalAmount;
     }
 
-    public static IndependentCreditNote CreateNewInvoice(string number,
+    public static IndependentCreditNote CreateNew(string number,
         string externalNumber,
         AccountingDocumentStatus status,
         decimal totalAmount)

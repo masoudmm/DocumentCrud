@@ -18,7 +18,7 @@ public class EditIndependentCreditCommandValidator : AbstractValidator<EditIndep
             .Must(x => int.TryParse(x, out var val) &&
             val > 0).WithMessage("Invalid Number.");
 
-        RuleFor(c => c.ExternalInvoiceNumber)
+        RuleFor(c => c.ExternalCreditNumber)
             .NotNull()
             .NotEmpty()
             .Length(10);
