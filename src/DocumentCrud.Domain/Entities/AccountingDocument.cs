@@ -1,6 +1,6 @@
 ﻿namespace DocumentCrud.Domain.Entities;
 
-public abstract class AccountingDocument
+public abstract class AccountingDocument : IEntity
 {
     public int Id { get; private set; }
 

@@ -5,11 +5,13 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocumentCrud.WebAPI", "src\DocumentCrud.WebAPI\DocumentCrud.WebAPI.csproj", "{3933F5EA-5EB1-4FC9-B675-9DEE7C87C7C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentCrud.Domain", "src\DocumentCrud.Domain\DocumentCrud.Domain.csproj", "{6EBE067E-403A-4440-A504-544E8BBBBA28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocumentCrud.Domain", "src\DocumentCrud.Domain\DocumentCrud.Domain.csproj", "{6EBE067E-403A-4440-A504-544E8BBBBA28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentCrud.Application", "src\DocumentCrud.Application\DocumentCrud.Application.csproj", "{CF368B04-6316-4D87-B343-2DC86C57DA76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocumentCrud.Application", "src\DocumentCrud.Application\DocumentCrud.Application.csproj", "{CF368B04-6316-4D87-B343-2DC86C57DA76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentCrud.Infrastructure", "src\DocumentCrud.Infrastructure\DocumentCrud.Infrastructure.csproj", "{B4B6BCE3-AA97-4AE0-9DC1-CAF690D44474}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocumentCrud.Infrastructure", "src\DocumentCrud.Infrastructure\DocumentCrud.Infrastructure.csproj", "{B4B6BCE3-AA97-4AE0-9DC1-CAF690D44474}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Tests", "Domain.Tests\Domain.Tests.csproj", "{6A9F5B66-4B1F-4606-B231-CA529DEBFFC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{B4B6BCE3-AA97-4AE0-9DC1-CAF690D44474}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4B6BCE3-AA97-4AE0-9DC1-CAF690D44474}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4B6BCE3-AA97-4AE0-9DC1-CAF690D44474}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A9F5B66-4B1F-4606-B231-CA529DEBFFC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A9F5B66-4B1F-4606-B231-CA529DEBFFC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A9F5B66-4B1F-4606-B231-CA529DEBFFC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A9F5B66-4B1F-4606-B231-CA529DEBFFC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
