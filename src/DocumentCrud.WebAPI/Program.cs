@@ -1,5 +1,7 @@
 using DocumentCrud.Application.Extentions;
 using DocumentCrud.Infrastructure.Extentions;
+using DocumentCrud.Server.Extentions;
+using DocumentCrud.Server.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,5 +14,8 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 
 app.UseHttpsRedirection();
+
+app.UseExceptionFilter();
+app.MapDocumentrEndPoints();
 
 app.Run();
