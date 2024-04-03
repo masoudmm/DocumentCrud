@@ -37,18 +37,18 @@ public class IndependentCreditNote : CreditDocument, IEntity, IAggregateRoot
 
     public static IndependentCreditNote CreateNew(string number,
         string externalNumber,
-        AccountingDocumentStatus status,
         decimal totalAmount)
     {
-        if (status == AccountingDocumentStatus.Approved)
+        if (number.Equals(externalNumber,
+            StringComparison.OrdinalIgnoreCase))
         {
-            throw new DomainException("Independent credit note Cannot be created with Approved status");
+            throw new DomainException("invoice number cannot be the same as externalInvoiceNumber");
         }
 
         return new IndependentCreditNote(number,
-        externalNumber,
-        status,
-        totalAmount);
+            externalNumber,
+            AccountingDocumentStatus.WaitingForApproval,
+            totalAmount);
     }
 
     public void Delete()

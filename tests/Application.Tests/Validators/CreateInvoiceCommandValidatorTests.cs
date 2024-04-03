@@ -20,7 +20,6 @@ public class CreateInvoiceCommandValidatorTests
         // Arrange
         var command = new CreateInvoiceCommand("123456789000000",
             "123456inv1",
-            AccountingDocumentStatus.WaitingForApproval,
             100,
             Enumerable.Empty<DependentCreditNoteDto>().ToList());
 
@@ -37,7 +36,6 @@ public class CreateInvoiceCommandValidatorTests
         // Arrange
         var command = new CreateInvoiceCommand("1234567890",
             "123456inv111111",
-            AccountingDocumentStatus.WaitingForApproval,
             100,
             Enumerable.Empty<DependentCreditNoteDto>().ToList());
         // Act
@@ -53,7 +51,6 @@ public class CreateInvoiceCommandValidatorTests
         // Arrange
         var command = new CreateInvoiceCommand("1234567890",
             "1234567890",
-            AccountingDocumentStatus.WaitingForApproval, 
             100,
             Enumerable.Empty<DependentCreditNoteDto>().ToList());
 

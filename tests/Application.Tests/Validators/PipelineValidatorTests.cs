@@ -20,7 +20,6 @@ public class PipelineValidatorTests
         var mockValidator = new Mock<IValidator<CreateInvoiceCommand>>();
         var request = new CreateInvoiceCommand("1234567890",
             "123456inv1",
-            AccountingDocumentStatus.WaitingForApproval,
             100m,
             Enumerable.Empty<DependentCreditNoteDto>().ToList());
 
@@ -51,7 +50,6 @@ public class PipelineValidatorTests
         var mockValidator = new Mock<IValidator<CreateInvoiceCommand>>();
         var request = new CreateInvoiceCommand("1234567890",
                         "123456inv1",
-                        AccountingDocumentStatus.WaitingForApproval,
                         100m,
                         Enumerable.Empty<DependentCreditNoteDto>().ToList());
 

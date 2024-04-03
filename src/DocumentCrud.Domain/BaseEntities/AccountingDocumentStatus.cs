@@ -2,6 +2,6 @@
 
 public enum AccountingDocumentStatus
 {
+    WaitingForApproval,
     Approved,
-    WaitingForApproval
 }

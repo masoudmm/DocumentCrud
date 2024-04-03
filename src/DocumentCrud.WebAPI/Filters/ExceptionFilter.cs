@@ -1,7 +1,8 @@
 ﻿using DocumentCrud.Application.Exceptions;
+using DocumentCrud.Domain.Exception;
 using Microsoft.AspNetCore.Diagnostics;
 
-namespace DocumentCrud.Server.Filters;
+namespace DocumentCrud.WebAPI.Filters;
 
 public static class ExceptionFilter
 {
@@ -19,6 +20,7 @@ public static class ExceptionFilter
                         result = Results.ValidationProblem(validationFailureException.Failures);
                         break;
 
+                    case DomainException domainException:
                     case DbEntityNotFoundException dbEntityNotFoundException:
                     case DbEntityAlreadyExistException DbEntityAlreadyExistException:
                         result = Results.Problem(detail: exception.Message, statusCode: StatusCodes.Status500InternalServerError);

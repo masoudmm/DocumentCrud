@@ -125,17 +125,17 @@ public class Invoice : AccountingDocument, IEntity, IAggregateRoot
 
     public static Invoice CreateNew(string number,
         string externalNumber,
-        AccountingDocumentStatus status,
         decimal totalAmount)
     {
-        if (status == AccountingDocumentStatus.Approved)
+        if (number.Equals(externalNumber,
+            StringComparison.OrdinalIgnoreCase))
         {
-            throw new DomainException("Invoice Cannot be created with Approved status");
+            throw new DomainException("invoice number cannot be the same as externalInvoiceNumber");
         }
 
         return new Invoice(number,
             externalNumber,
-            status,
+            AccountingDocumentStatus.WaitingForApproval,
             totalAmount);
     }
 }

@@ -18,7 +18,6 @@ public class IndependentCreditTests
         // Act
         var independentCredit = IndependentCreditNote.CreateNew(number,
             externalNumber,
-            status,
             totalAmount);
 
         // Assert
@@ -31,23 +30,6 @@ public class IndependentCreditTests
 
 
     [Fact]
-    public void Create_New_Approved_IndependentCredit_Should_Fail()
-    {
-        // Arrange
-        string number = "1234567890";
-        string externalNumber = "1234567icr1";
-        AccountingDocumentStatus status = AccountingDocumentStatus.Approved;
-        decimal totalAmount = 1000m;
-
-        // Act
-        // Assert
-        Assert.Throws<DomainException>(() => IndependentCreditNote.CreateNew(number,
-            externalNumber,
-            status,
-            totalAmount));
-    }
-
-    [Fact]
     public void Edit_IndependentCredit_Should_Be_Successfull()
     {
         // Arrange
@@ -58,7 +40,6 @@ public class IndependentCreditTests
 
         var independentCredit = IndependentCreditNote.CreateNew(number,
             externalNumber,
-            status,
             totalAmount);
 
         decimal newTotalAmount = 1001m;
@@ -88,7 +69,6 @@ public class IndependentCreditTests
 
         var independentCredit = IndependentCreditNote.CreateNew(number,
             externalNumber,
-            status,
             totalAmount);
 
         AccountingDocumentStatus newStatus = AccountingDocumentStatus.Approved;

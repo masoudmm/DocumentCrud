@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using DocumentCrud.Application.Dtos;
-using DocumentCrud.Domain.BaseEntities;
 using DocumentCrud.Domain.Contracts.Persistence;
 using DocumentCrud.Domain.InvoiceAggregate;
 using MediatR;
@@ -9,7 +8,6 @@ namespace DocumentCrud.Application.Features.Commands.Create;
 
 public record CreateInvoiceCommand(string Number,
         string ExternalInvoiceNumber,
-        AccountingDocumentStatus Status,
         decimal TotalAmount,
         IReadOnlyList<DependentCreditNoteDto> DependentCreditNotes) : IRequest<DocumentDto>;
 
@@ -32,7 +30,6 @@ public class CreateInvoiceCommandHandler : IRequestHandler<CreateInvoiceCommand,
 
         var newInvoice = Invoice.CreateNew(request.Number,
         request.ExternalInvoiceNumber,
-        request.Status,
         request.TotalAmount);
 
         foreach (var dependentCredit in request.DependentCreditNotes)

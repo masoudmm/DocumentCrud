@@ -1,7 +1,6 @@
 using AutoMapper;
 using DocumentCrud.Application.Dtos;
 using DocumentCrud.Application.Features.Commands.Create;
-using DocumentCrud.Domain.BaseEntities;
 using DocumentCrud.Domain.Contracts.Persistence;
 using DocumentCrud.Domain.Contracts.Persistence.Repositories;
 using DocumentCrud.Domain.CreditAggregate;
@@ -23,12 +22,10 @@ namespace Application.Tests.Commands
             var command = new CreateIndependentCreditCommand(
                 "1234567890",
                 "123456icr1",
-                AccountingDocumentStatus.WaitingForApproval,
                 100m);
 
             var createdCredit = IndependentCreditNote.CreateNew(command.Number,
                 command.ExternalCreditNumber,
-                command.Status,
                 command.TotalAmount);
 
             mockUnitOfWork.Setup(uow => uow.IndependentCreditNotes)
@@ -48,7 +45,6 @@ namespace Application.Tests.Commands
             {
                 Number = command.Number,
                 ExternalNumber = command.ExternalCreditNumber,
-                Status = command.Status,
                 TotalAmount = command.TotalAmount,
             };
             mockMapper.Setup(mapper => mapper.Map<DocumentDto>(It.IsAny<IndependentCreditNote>()))

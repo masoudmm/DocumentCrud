@@ -1,21 +1,29 @@
 using DocumentCrud.Application.Extentions;
 using DocumentCrud.Infrastructure.Extentions;
-using DocumentCrud.Server.Extentions;
-using DocumentCrud.Server.Filters;
+using DocumentCrud.WebAPI.Extentions;
+using DocumentCrud.WebAPI.Filters;
 
-var builder = WebApplication.CreateBuilder(args);
+namespace DocumentCrud.WebAPI;
 
-// Add services to the container.
-builder.Services.AddInfrastructure(builder.Configuration);
-builder.Services.AddApplication();
+public class Program
+{
+    public static async Task Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
 
-var app = builder.Build();
+        // Add services to the container.
+        builder.Services.AddInfrastructure(builder.Configuration);
+        builder.Services.AddApplication();
 
-// Configure the HTTP request pipeline.
+        var app = builder.Build();
 
-app.UseHttpsRedirection();
+        // Configure the HTTP request pipeline.
 
-app.UseExceptionFilter();
-app.MapDocumentrEndPoints();
+        app.UseHttpsRedirection();
 
-app.Run();
+        app.UseExceptionFilter();
+        app.MapDocumentrEndPoints();
+
+        app.Run();
+    }
+}

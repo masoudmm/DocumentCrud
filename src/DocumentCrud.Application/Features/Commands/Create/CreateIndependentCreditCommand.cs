@@ -9,7 +9,6 @@ namespace DocumentCrud.Application.Features.Commands.Create;
 
 public record CreateIndependentCreditCommand(string Number,
         string ExternalCreditNumber,
-        AccountingDocumentStatus Status,
         decimal TotalAmount) : IRequest<DocumentDto>;
 
 public class CreateIndependentCreditCommandHandler : IRequestHandler<CreateIndependentCreditCommand, DocumentDto>
@@ -31,7 +30,6 @@ public class CreateIndependentCreditCommandHandler : IRequestHandler<CreateIndep
 
         var newCredit = IndependentCreditNote.CreateNew(request.Number,
             request.ExternalCreditNumber,
-            request.Status,
             request.TotalAmount);
 
         await _unitOfWork.IndependentCreditNotes
