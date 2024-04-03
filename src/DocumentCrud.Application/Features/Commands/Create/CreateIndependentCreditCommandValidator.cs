@@ -11,7 +11,7 @@ public class CreateIndependentCreditCommandValidator : AbstractValidator<CreateI
             .NotEmpty()
             .Length(10)
             .Must(x => int.TryParse(x, out var val) &&
-            val > 0).WithMessage("Invalid Number.");
+            val > 0).WithMessage("Invalid Number");
 
         RuleFor(c => c.ExternalCreditNumber)
             .NotNull()
