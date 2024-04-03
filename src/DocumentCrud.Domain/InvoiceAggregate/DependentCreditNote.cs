@@ -1,10 +1,10 @@
 ﻿using DocumentCrud.Domain.BaseEntities;
+using DocumentCrud.Domain.Exception;
 
 namespace DocumentCrud.Domain.InvoiceAggregate;
 
 public class DependentCreditNote : CreditDocument
 {
-    public int ParentInvoiceId { get; private set; }
     public Invoice ParentInvoice { get; private set; }
 
     public string ParentInvoiceNumber => ParentInvoice.Number;
@@ -13,17 +13,14 @@ public class DependentCreditNote : CreditDocument
     {
     }
 
-    private DependentCreditNote(string number,
+    public DependentCreditNote(
+        string number,
         string externalCreditNumber,
-        AccountingDocumentStatus status,
-        decimal totalAmount,
-        Invoice parentInvoice) : base()
+        decimal totalAmount) : base()
     {
         Number = number;
         ExternalCreditNumber = externalCreditNumber;
-        Status = status;
         TotalAmount = totalAmount;
-        ParentInvoice = parentInvoice;
     }
 
     public void Edit(string number,
@@ -31,26 +28,14 @@ public class DependentCreditNote : CreditDocument
         AccountingDocumentStatus status,
         decimal totalAmount)
     {
-        //We can check some business rules and create events here
+        if (Status == AccountingDocumentStatus.Approved)
+        {
+            throw new DomainException("Approved dependent credit cannot be edited");
+        }
 
         Number = number;
         ExternalCreditNumber = externalCreditNumber;
         Status = status;
         TotalAmount = totalAmount;
-    }
-
-    public static DependentCreditNote CreateNew(string number,
-        string externalCreditNumber,
-        AccountingDocumentStatus status,
-        decimal totalAmount,
-        Invoice parentInvoice)
-    {
-        //We can check some business rules and create events here
-
-        return new DependentCreditNote(number,
-        externalCreditNumber,
-        status,
-        totalAmount,
-        parentInvoice);
     }
 }

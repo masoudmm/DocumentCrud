@@ -42,6 +42,6 @@ public class InvoiceEntityTypeConfiguration : IEntityTypeConfiguration<Invoice>
 
         builder.HasMany(i => i.DependentCreditNotes)
             .WithOne(dct => dct.ParentInvoice)
-            .HasForeignKey(dct => dct.ParentInvoiceId);
+            .HasForeignKey("ParentInvoiceId");
     }
 }

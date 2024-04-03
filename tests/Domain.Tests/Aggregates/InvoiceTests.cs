@@ -15,7 +15,7 @@ public class InvoiceTests
         decimal totalAmount = 1000m;
 
         // Act
-        var invoice = Invoice.CreateNew(number,
+        var invoice = new Invoice(number,
             externalNumber,
             totalAmount);
 
@@ -37,7 +37,7 @@ public class InvoiceTests
         AccountingDocumentStatus status = AccountingDocumentStatus.WaitingForApproval;
         decimal totalAmount = 1000m;
 
-        var invoice = Invoice.CreateNew(number,
+        var invoice = new Invoice(number,
             externalNumber,
             totalAmount);
 
@@ -66,7 +66,7 @@ public class InvoiceTests
         string externalNumber = "1234567inv1";
         decimal totalAmount = 1000m;
 
-        var invoice = Invoice.CreateNew(number,
+        var invoice = new Invoice(number,
             externalNumber,
             totalAmount);
 
@@ -94,7 +94,7 @@ public class InvoiceTests
     public void Invoice_Add_Dependent_Credit_Should_Be_Successfull()
     {
         // Arrange
-        var invoice = Invoice.CreateNew("1234567890",
+        var invoice = new Invoice("1234567890",
             "1234567iv1",
             1000m);
 
@@ -103,17 +103,12 @@ public class InvoiceTests
         AccountingDocumentStatus creditStatus = AccountingDocumentStatus.WaitingForApproval;
         decimal creditTotalAmount = 200m;
 
-        var newDependentCredit = DependentCreditNote.CreateNew(creditNumber,
+        var newDependentCredit = new DependentCreditNote(creditNumber,
             externalCreditNumber,
-            creditStatus,
-            creditTotalAmount,
-            invoice);
+            creditTotalAmount);
 
         // Act
-        invoice.AddDependentCredit(creditNumber,
-            externalCreditNumber,
-            creditStatus,
-            creditTotalAmount);
+        invoice.AddDependentCredit(newDependentCredit);
 
         // Assert
         Assert.Single(invoice.DependentCreditNotes);
@@ -129,7 +124,7 @@ public class InvoiceTests
     public void Invoice_Edit_Dependent_Credit_Should_Be_Successfull()
     {
         // Arrange
-        var invoice = Invoice.CreateNew("1234567890",
+        var invoice = new Invoice("1234567890",
             "1234567iv1",
             1000m);
 
@@ -138,16 +133,11 @@ public class InvoiceTests
         AccountingDocumentStatus creditStatus = AccountingDocumentStatus.WaitingForApproval;
         decimal creditTotalAmount = 200m;
 
-        var newDependentCredit = DependentCreditNote.CreateNew(creditNumber,
+        var newDependentCredit = new DependentCreditNote(creditNumber,
             externalCreditNumber,
-            creditStatus,
-            creditTotalAmount,
-            invoice);
-
-        invoice.AddDependentCredit(creditNumber,
-            externalCreditNumber,
-            creditStatus,
             creditTotalAmount);
+
+        invoice.AddDependentCredit(newDependentCredit);
 
         decimal newCreditTotalAmount = 201m;
 
@@ -172,7 +162,7 @@ public class InvoiceTests
     public void Approved_Invoice_Add_Dependent_Credit_Should_Fail()
     {
         // Arrange
-        var invoice = Invoice.CreateNew("1234567890",
+        var invoice = new Invoice("1234567890",
             "1234567iv1",
             1000m);
 
@@ -183,21 +173,15 @@ public class InvoiceTests
 
         string creditNumber = "1234567891";
         string externalCreditNumber = "1234567dc1";
-        AccountingDocumentStatus creditStatus = AccountingDocumentStatus.WaitingForApproval;
         decimal creditTotalAmount = 200m;
 
-        var newDependentCredit = DependentCreditNote.CreateNew(creditNumber,
+        var newDependentCredit = new DependentCreditNote(creditNumber,
             externalCreditNumber,
-            creditStatus,
-            creditTotalAmount,
-            invoice);
+            creditTotalAmount);
 
         // Act
         // Assert
-        Assert.Throws<DomainException>(() => invoice.AddDependentCredit(creditNumber,
-            externalCreditNumber,
-            creditStatus,
-            creditTotalAmount));
+        Assert.Throws<DomainException>(() => invoice.AddDependentCredit(newDependentCredit));
     }
 
 
@@ -210,14 +194,13 @@ public class InvoiceTests
         AccountingDocumentStatus creditStatus = AccountingDocumentStatus.WaitingForApproval;
         decimal creditTotalAmount = 200m;
 
-        var invoice = Invoice.CreateNew("1234567890",
+        var invoice = new Invoice("1234567890",
             "1234567iv1",
             1000m);
 
-        invoice.AddDependentCredit(creditNumber,
+        invoice.AddDependentCredit(new DependentCreditNote(creditNumber,
             externalCreditNumber,
-            creditStatus,
-            creditTotalAmount);
+            creditTotalAmount));
 
         invoice.Edit(invoice.Number,
             invoice.ExternalInvoiceNumber,
@@ -240,20 +223,18 @@ public class InvoiceTests
     public void Invoice_Add_Exceeded_Dependent_Credit_Should_Fail()
     {
         // Arrange
-        var invoice = Invoice.CreateNew("1234567890",
+        var invoice = new Invoice("1234567890",
             "1234567iv1",
             1000m);
 
         string dependentNumber = "1234567891";
         string dependentExternalNumber = "1234567dc1";
-        AccountingDocumentStatus dependentStatus = AccountingDocumentStatus.WaitingForApproval;
         decimal dependentTotalAmount = 1001m;
 
         // Act
         // Assert
-        Assert.Throws<DomainException>(() => invoice.AddDependentCredit(dependentNumber,
+        Assert.Throws<DomainException>(() => invoice.AddDependentCredit(new DependentCreditNote(dependentNumber,
             dependentExternalNumber,
-            dependentStatus,
-            dependentTotalAmount));
+            dependentTotalAmount)));
     }
 }

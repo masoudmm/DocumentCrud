@@ -48,7 +48,7 @@ public class InvoiceRepositoryTests : IDisposable
     public async Task AddAsync_ShouldAddInvoice_Without_Dependent_Credit()
     {
         // Arrange
-        var invoice = Invoice.CreateNew("1234567890",
+        var invoice = new Invoice("1234567890",
             "123456inv1",
             200m);
 
@@ -70,18 +70,16 @@ public class InvoiceRepositoryTests : IDisposable
     public async Task AddAsync_ShouldAddInvoice_With_Dependent_Credit()
     {
         // Arrange
-        var invoice = Invoice.CreateNew("1234567890",
+        var invoice = new Invoice("1234567890",
             "123456inv1",
             200m);
 
         var creditNumber = "1234567890";
         var externalCreditNumber = "1234567dc1";
-        var creditStatus = AccountingDocumentStatus.WaitingForApproval;
         var creditTotalAmount = -200m;
-        invoice.AddDependentCredit(creditNumber, 
+        invoice.AddDependentCredit(new DependentCreditNote(creditNumber,
             externalCreditNumber,
-            creditStatus,
-            creditTotalAmount);
+            creditTotalAmount));
 
         // Act
         await _repository.AddAsync(invoice);
@@ -103,7 +101,7 @@ public class InvoiceRepositoryTests : IDisposable
             .First();
         Assert.Equal(creditNumber, credit.Number);
         Assert.Equal(externalCreditNumber, credit.ExternalCreditNumber);
-        Assert.Equal(creditStatus, credit.Status);
+        Assert.Equal(AccountingDocumentStatus.WaitingForApproval, credit.Status);
         Assert.Equal(creditTotalAmount, credit.TotalAmount);
     }
 
@@ -111,7 +109,7 @@ public class InvoiceRepositoryTests : IDisposable
     public async Task GetByIdAsync_ShouldReturnInvoice()
     {
         // Arrange
-        var invoice = Invoice.CreateNew("1234567890",
+        var invoice = new Invoice("1234567890",
             "123456inv1",
             200m);
 
@@ -135,7 +133,7 @@ public class InvoiceRepositoryTests : IDisposable
     public async Task Remove_Should_Succeed()
     {
         // Arrange
-        var invoice = Invoice.CreateNew("1234567890",
+        var invoice = new Invoice("1234567890",
                     "123456inv1",
                     200m);
 
@@ -153,7 +151,7 @@ public class InvoiceRepositoryTests : IDisposable
     public async Task Get_Removed_Invoice_Should_Fail()
     {
         // Arrange
-        var invoice = Invoice.CreateNew("1234567890",
+        var invoice = new Invoice("1234567890",
                     "123456inv1",
                     200m);
 
@@ -172,18 +170,16 @@ public class InvoiceRepositoryTests : IDisposable
     public async Task Remove_Dependent_Credit_From_Invoice_Should_Succeed()
     {
         // Arrange
-        var invoice = Invoice.CreateNew("1234567890",
+        var invoice = new Invoice("1234567890",
             "123456inv1",
             200m);
 
         var creditNumber = "1234567890";
         var externalCreditNumber = "1234567dc1";
-        var creditStatus = AccountingDocumentStatus.WaitingForApproval;
         var creditTotalAmount = -200m;
-        invoice.AddDependentCredit(creditNumber,
+        invoice.AddDependentCredit(new DependentCreditNote(creditNumber,
             externalCreditNumber,
-            creditStatus,
-            creditTotalAmount);
+            creditTotalAmount));
 
         await _repository.AddAsync(invoice);
         await _context.SaveChangesAsync();

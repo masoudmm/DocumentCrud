@@ -22,5 +22,20 @@ public class DocumentMapping : Profile
             .ForMember(c => c.ExternalNumber, opt => opt.MapFrom(s => s.ExternalCreditNumber))
             .ForMember(c => c.Status, opt => opt.MapFrom(s => s.Status))
             .ForMember(c => c.TotalAmount, opt => opt.MapFrom(s => s.TotalAmount));
+
+
+        CreateMap<DependentCreditNoteDto, DependentCreditNote>()
+            .ForMember(c => c.Id, opt => opt.MapFrom(s => s.Id))
+            .ForMember(c => c.Number, opt => opt.MapFrom(s => s.Number))
+            .ForMember(c => c.ExternalCreditNumber, opt => opt.MapFrom(s => s.ExternalCreditNumber))
+            .ForMember(c => c.Status, opt => opt.MapFrom(s => s.Status))
+            .ForMember(c => c.TotalAmount, opt => opt.MapFrom(s => s.TotalAmount));
+
+        CreateMap<DependentCreditNote, DependentCreditNoteDto>()
+            .ForMember(c => c.Id, opt => opt.MapFrom(s => s.Id))
+            .ForMember(c => c.Number, opt => opt.MapFrom(s => s.Number))
+            .ForMember(c => c.ExternalCreditNumber, opt => opt.MapFrom(s => s.ExternalCreditNumber))
+            .ForMember(c => c.Status, opt => opt.MapFrom(s => s.Status))
+            .ForMember(c => c.TotalAmount, opt => opt.MapFrom(s => s.TotalAmount));
     }
 }

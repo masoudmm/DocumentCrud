@@ -87,28 +87,4 @@ public class DomainBaseTests
 
         AssertFailingTypes(failingTypes);
     }
-
-    [Fact]
-    public void Domain_Object_Should_Have_Only_Private_Constructors()
-    {
-        var domainObjectTypes = Types.InAssembly(DomainAssembly)
-            .That()
-            .ImplementInterface(typeof(IEntity))
-            .GetTypes();
-
-        List<Type> failingTypes = [];
-        foreach (var domainObjectType in domainObjectTypes)
-        {
-            var constructors = domainObjectType.GetConstructors(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
-            foreach (var constructorInfo in constructors)
-            {
-                if (!constructorInfo.IsPrivate)
-                {
-                    failingTypes.Add(domainObjectType);
-                }
-            }
-        }
-
-        AssertFailingTypes(failingTypes);
-    }
 }

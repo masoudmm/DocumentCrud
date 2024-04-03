@@ -10,18 +10,23 @@ public class Invoice : AccountingDocument, IEntity, IAggregateRoot
 
     public string ExternalInvoiceNumber { get; private set; }
 
-    public IReadOnlyList<DependentCreditNote> DependentCreditNotes => _dependentCreditNotes.ToList();
+    public IReadOnlyList<DependentCreditNote> DependentCreditNotes => _dependentCreditNotes.AsReadOnly();
 
     private Invoice() { }
 
-    private Invoice(string number,
+    public Invoice(string number,
         string externalInvoiceNumber,
-        AccountingDocumentStatus status,
         decimal totalAmount) : base()
     {
+        if (number.Equals(externalInvoiceNumber,
+            StringComparison.OrdinalIgnoreCase))
+        {
+            throw new DomainException("invoice number cannot be the same as externalInvoiceNumber");
+        }
+
         Number = number;
         ExternalInvoiceNumber = externalInvoiceNumber;
-        Status = status;
+        Status = AccountingDocumentStatus.WaitingForApproval;
         TotalAmount = totalAmount;
         _dependentCreditNotes = [];
     }
@@ -42,10 +47,7 @@ public class Invoice : AccountingDocument, IEntity, IAggregateRoot
         TotalAmount = newTotalAmount;
     }
 
-    public void AddDependentCredit(string number,
-        string externaCreditNumber,
-        AccountingDocumentStatus creditStatus,
-        decimal creditTotalAmount)
+    public void AddDependentCredit(DependentCreditNote dependentCredit)
     {
         if (Status == AccountingDocumentStatus.Approved)
         {
@@ -53,20 +55,14 @@ public class Invoice : AccountingDocument, IEntity, IAggregateRoot
         }
 
         var sumOfDependentCreditsAfterEditEdited = _dependentCreditNotes
-            .Sum(x => x.TotalAmount) + creditTotalAmount;
+            .Sum(x => x.TotalAmount) + dependentCredit.TotalAmount;
 
         if (Math.Abs(sumOfDependentCreditsAfterEditEdited) > TotalAmount)
         {
             throw new DomainException("Sum of dependent credits of an invoice can't exceed invoice total amount");
         }
 
-        var newDependentCredit = DependentCreditNote.CreateNew(number,
-            externaCreditNumber,
-            creditStatus,
-            creditTotalAmount,
-            this);
-
-        _dependentCreditNotes.Add(newDependentCredit);
+        _dependentCreditNotes.Add(dependentCredit);
     }
 
     public void EditDependentCredit(int creditIdTobeEdited,
@@ -123,19 +119,18 @@ public class Invoice : AccountingDocument, IEntity, IAggregateRoot
         _dependentCreditNotes.Clear();
     }
 
-    public static Invoice CreateNew(string number,
-        string externalNumber,
-        decimal totalAmount)
-    {
-        if (number.Equals(externalNumber,
-            StringComparison.OrdinalIgnoreCase))
-        {
-            throw new DomainException("invoice number cannot be the same as externalInvoiceNumber");
-        }
+    //public static Invoice CreateNew(string number,
+    //    string externalNumber,
+    //    decimal totalAmount)
+    //{
+    //    if (number.Equals(externalNumber,
+    //        StringComparison.OrdinalIgnoreCase))
+    //    {
+    //        throw new DomainException("invoice number cannot be the same as externalInvoiceNumber");
+    //    }
 
-        return new Invoice(number,
-            externalNumber,
-            AccountingDocumentStatus.WaitingForApproval,
-            totalAmount);
-    }
+    //    return new Invoice(number,
+    //        externalNumber,
+    //        totalAmount);
+    //}
 }

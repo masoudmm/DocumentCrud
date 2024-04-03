@@ -28,16 +28,13 @@ public class CreateInvoiceCommandHandler : IRequestHandler<CreateInvoiceCommand,
     {
         ArgumentNullException.ThrowIfNull(request, nameof(request));
 
-        var newInvoice = Invoice.CreateNew(request.Number,
+        var newInvoice = new Invoice(request.Number,
         request.ExternalInvoiceNumber,
         request.TotalAmount);
 
         foreach (var dependentCredit in request.DependentCreditNotes)
         {
-            newInvoice.AddDependentCredit(dependentCredit.Number,
-                dependentCredit.ExternalCreditNumber,
-                dependentCredit.Status,
-                dependentCredit.TotalAmount);
+            newInvoice.AddDependentCredit(_mapper.Map<DependentCreditNote>(dependentCredit));
         }
 
         await _unitOfWork.Invoices

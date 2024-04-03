@@ -3,6 +3,7 @@ using DocumentCrud.Application.Dtos;
 using DocumentCrud.Application.Exceptions;
 using DocumentCrud.Domain.BaseEntities;
 using DocumentCrud.Domain.Contracts.Persistence;
+using DocumentCrud.Domain.InvoiceAggregate;
 using MediatR;
 
 namespace DocumentCrud.Application.Features.Commands.Edit;
@@ -56,10 +57,7 @@ public class EditInvoiceCommandHandler : IRequestHandler<EditInvoiceCommand, Doc
             }
             else
             {
-                invoiceToEdit.AddDependentCredit(newDependentCreditNote.Number,
-                    newDependentCreditNote.ExternalCreditNumber,
-                    newDependentCreditNote.Status,
-                    newDependentCreditNote.TotalAmount);
+                invoiceToEdit.AddDependentCredit(_mapper.Map<DependentCreditNote>(newDependentCreditNote));
             }
         }
 
