@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\DocumentCrud.Domain\DocumentCrud.Domain.csproj" />
+    <ProjectReference Include="..\..\src\DocumentCrud.Domain\DocumentCrud.Domain.csproj" />
   </ItemGroup>
 
 </Project>
