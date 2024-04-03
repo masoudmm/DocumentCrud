@@ -6,7 +6,7 @@ namespace DocumentCrud.Domain.InvoiceAggregate;
 
 public class Invoice : AccountingDocument, IEntity, IAggregateRoot
 {
-    private readonly HashSet<DependentCreditNote> _dependentCreditNotes;
+    private readonly List<DependentCreditNote> _dependentCreditNotes;
 
     public string ExternalInvoiceNumber { get; private set; }
 

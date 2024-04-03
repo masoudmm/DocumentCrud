@@ -1,9 +1,11 @@
-﻿using DocumentCrud.Domain.Contracts.Persistence.Repositories;
+﻿using DocumentCrud.Application.Exceptions;
+using DocumentCrud.Domain.Contracts.Persistence.Repositories;
 using DocumentCrud.Domain.InvoiceAggregate;
 using Microsoft.EntityFrameworkCore;
+
 namespace DocumentCrud.Infrastructure.Persistance.Repositories;
 
-internal class InvoiceRepository : IInvoiceRepository
+public class InvoiceRepository : IInvoiceRepository
 {
     private readonly ApplicationDbContext _context;
 
@@ -26,8 +28,15 @@ internal class InvoiceRepository : IInvoiceRepository
 
     public async Task<Invoice> GetByIdAsync(int id)
     {
-        return await _context.Invoices
-            .FirstAsync( i => i.Id == id);
+        var invoice = await _context.Invoices
+            .FirstOrDefaultAsync( i => i.Id == id);
+
+        if (invoice is null)
+        {
+            throw new DbEntityNotFoundException($"invoice with id: {id} not found");
+        }
+
+        return invoice;
     }
 
     public int Remove(Invoice entity)
