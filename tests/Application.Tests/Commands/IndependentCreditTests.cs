@@ -1,7 +1,6 @@
 using AutoMapper;
 using DocumentCrud.Application.Dtos;
 using DocumentCrud.Application.Features.Commands.Create;
-using DocumentCrud.Domain.BaseEntities;
 using DocumentCrud.Domain.Contracts.Persistence;
 using DocumentCrud.Domain.Contracts.Persistence.Repositories;
 using DocumentCrud.Domain.CreditAggregate;
