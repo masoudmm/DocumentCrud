@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using DocumentCrud.Application.Dtos;
+using DocumentCrud.Domain.BaseEntities;
 using DocumentCrud.Domain.Contracts.Persistence;
-using DocumentCrud.Domain.Entities;
+using DocumentCrud.Domain.InvoiceAggregate;
 using MediatR;
 
 namespace DocumentCrud.Application.Features.Commands.Create;

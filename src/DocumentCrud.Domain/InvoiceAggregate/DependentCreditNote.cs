@@ -1,4 +1,6 @@
-﻿namespace DocumentCrud.Domain.Entities;
+﻿using DocumentCrud.Domain.BaseEntities;
+
+namespace DocumentCrud.Domain.InvoiceAggregate;
 
 public class DependentCreditNote : CreditDocument
 {

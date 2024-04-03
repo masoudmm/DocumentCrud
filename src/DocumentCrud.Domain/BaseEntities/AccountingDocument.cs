@@ -1,12 +1,12 @@
-﻿namespace DocumentCrud.Domain.Entities;
+﻿namespace DocumentCrud.Domain.BaseEntities;
 
-public abstract class AccountingDocument : IEntity
+public abstract class AccountingDocument
 {
     public int Id { get; private set; }
 
-    public string Number { get; protected set; } 
+    public string Number { get; protected set; }
 
     public AccountingDocumentStatus Status { get; protected set; }
-    
+
     public decimal TotalAmount { get; protected set; }
 }

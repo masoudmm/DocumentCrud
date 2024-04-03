@@ -1,4 +1,4 @@
-﻿namespace DocumentCrud.Domain.Entities;
+﻿namespace DocumentCrud.Domain.BaseEntities;
 
 public enum AccountingDocumentStatus
 {

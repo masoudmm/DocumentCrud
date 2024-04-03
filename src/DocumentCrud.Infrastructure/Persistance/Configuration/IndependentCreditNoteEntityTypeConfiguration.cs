@@ -1,4 +1,4 @@
-﻿using DocumentCrud.Domain.Entities;
+﻿using DocumentCrud.Domain.CreditAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

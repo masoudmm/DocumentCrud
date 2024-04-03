@@ -1,5 +1,5 @@
 ﻿using DocumentCrud.Domain.Contracts.Persistence.Repositories;
-using DocumentCrud.Domain.Entities;
+using DocumentCrud.Domain.InvoiceAggregate;
 using Microsoft.EntityFrameworkCore;
 namespace DocumentCrud.Infrastructure.Persistance.Repositories;
 
@@ -48,7 +48,6 @@ internal class InvoiceRepository : IInvoiceRepository
         invoiceToBeUpdated.Edit(invoice.Number,
             invoice.ExternalInvoiceNumber,
             invoice.Status,
-            invoice.TotalAmount,
-            invoice.DependentCreditNotes);
+            invoice.TotalAmount);
     }
 }

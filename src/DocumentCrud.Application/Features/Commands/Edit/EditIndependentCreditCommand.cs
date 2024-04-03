@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using DocumentCrud.Application.Dtos;
 using DocumentCrud.Application.Exceptions;
+using DocumentCrud.Domain.BaseEntities;
 using DocumentCrud.Domain.Contracts.Persistence;
-using DocumentCrud.Domain.Entities;
 using MediatR;
 
 namespace DocumentCrud.Application.Features.Commands.Edit;

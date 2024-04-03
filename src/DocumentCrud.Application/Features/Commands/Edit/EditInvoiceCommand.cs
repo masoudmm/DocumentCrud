@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using DocumentCrud.Application.Dtos;
 using DocumentCrud.Application.Exceptions;
+using DocumentCrud.Domain.BaseEntities;
 using DocumentCrud.Domain.Contracts.Persistence;
-using DocumentCrud.Domain.Entities;
 using MediatR;
 
 namespace DocumentCrud.Application.Features.Commands.Edit;
@@ -12,7 +12,7 @@ public record EditInvoiceCommand(int Id,
     string ExternalInvoiceNumber,
     AccountingDocumentStatus Status,
     decimal TotalAmount,
-    IReadOnlyList<DependentCreditNoteDto> DependentCreditNotes) : IRequest<DocumentDto>;
+    IReadOnlyList<DependentCreditNoteDto> DependentCreditNoteDtos) : IRequest<DocumentDto>;
 
 public class EditInvoiceCommandHandler : IRequestHandler<EditInvoiceCommand, DocumentDto>
 {
@@ -41,11 +41,28 @@ public class EditInvoiceCommandHandler : IRequestHandler<EditInvoiceCommand, Doc
         invoiceToEdit.Edit(request.Number,
             request.ExternalInvoiceNumber,
             request.Status,
-            request.TotalAmount,
-            request.DependentCreditNotes
-            .Select(dcn => _mapper.Map<DependentCreditNote>(dcn))
-            .ToList());
-        
+            request.TotalAmount);
+
+        foreach (var newDependentCreditNote in request.DependentCreditNoteDtos)
+        {
+            var newDependentCreditNoteExists = false;
+            if (newDependentCreditNoteExists)
+            {
+                invoiceToEdit.EditDependentCredit(newDependentCreditNote.Id,
+                    newDependentCreditNote.Number,
+                    newDependentCreditNote.ExternalCreditNumber,
+                    newDependentCreditNote.Status,
+                    newDependentCreditNote.TotalAmount);
+            }
+            else
+            {
+                invoiceToEdit.AddDependentCredit(newDependentCreditNote.Number,
+                    newDependentCreditNote.ExternalCreditNumber,
+                    newDependentCreditNote.Status,
+                    newDependentCreditNote.TotalAmount);
+            }
+        }
+
         await _unitOfWork.CommitAsync();
 
         return _mapper.Map<DocumentDto>(invoiceToEdit);

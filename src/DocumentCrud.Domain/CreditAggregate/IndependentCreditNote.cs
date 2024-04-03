@@ -1,7 +1,13 @@
-﻿namespace DocumentCrud.Domain.Entities;
+﻿using DocumentCrud.Domain.BaseEntities;
+using DocumentCrud.Domain.Entities;
+using DocumentCrud.Domain.Exception;
 
-public class IndependentCreditNote : CreditDocument, IAggregateRoot
+namespace DocumentCrud.Domain.CreditAggregate;
+
+public class IndependentCreditNote : CreditDocument, IEntity, IAggregateRoot
 {
+    private IndependentCreditNote() { }
+
     private IndependentCreditNote(string number,
         string externalCreditNumber,
         AccountingDocumentStatus status,
@@ -18,7 +24,10 @@ public class IndependentCreditNote : CreditDocument, IAggregateRoot
         AccountingDocumentStatus status,
         decimal totalAmount)
     {
-        //We can check some business rules and create events here
+        if (Status == AccountingDocumentStatus.Approved)
+        {
+            throw new DomainException("Approved Independent credit note Cannot be edited");
+        }
 
         Number = number;
         ExternalCreditNumber = externalCreditNumber;
@@ -31,7 +40,10 @@ public class IndependentCreditNote : CreditDocument, IAggregateRoot
         AccountingDocumentStatus status,
         decimal totalAmount)
     {
-        //We can check some business rules and create events here
+        if (status == AccountingDocumentStatus.Approved)
+        {
+            throw new DomainException("Independent credit note Cannot be created with Approved status");
+        }
 
         return new IndependentCreditNote(number,
         externalNumber,
