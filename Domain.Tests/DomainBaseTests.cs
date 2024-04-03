@@ -1,9 +1,10 @@
 using DocumentCrud.Domain.Entities;
+using DocumentCrud.Domain.InvoiceAggregate;
 using NetArchTest.Rules;
 using System.Reflection;
 
 namespace DocumentCrud.Domain.Tests;
-public class DomainTests
+public class DomainBaseTests
 {
     private static Assembly DomainAssembly => typeof(Invoice).Assembly;
 
@@ -17,7 +18,8 @@ public class DomainTests
     {
         var entityTypes = Types.InAssembly(DomainAssembly)
             .That()
-            .Inherit(typeof(IEntity)).GetTypes();
+            .ImplementInterface(typeof(IEntity))
+            .GetTypes();
 
         var aggregateRoots = Types.InAssembly(DomainAssembly)
             .That().ImplementInterface(typeof(IAggregateRoot)).GetTypes().ToList();
@@ -61,7 +63,8 @@ public class DomainTests
     {
         var entityTypes = Types.InAssembly(DomainAssembly)
             .That()
-            .Inherit(typeof(IEntity)).GetTypes();
+            .ImplementInterface(typeof(IEntity))
+            .GetTypes();
 
         List<Type> failingTypes = [];
         foreach (var entityType in entityTypes)
@@ -90,7 +93,7 @@ public class DomainTests
     {
         var domainObjectTypes = Types.InAssembly(DomainAssembly)
             .That()
-                    .Inherit(typeof(IEntity))
+            .ImplementInterface(typeof(IEntity))
             .GetTypes();
 
         List<Type> failingTypes = [];

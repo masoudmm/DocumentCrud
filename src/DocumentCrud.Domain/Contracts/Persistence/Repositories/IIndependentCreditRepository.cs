@@ -1,4 +1,4 @@
-﻿using DocumentCrud.Domain.Entities;
+﻿using DocumentCrud.Domain.CreditAggregate;
 
 namespace DocumentCrud.Domain.Contracts.Persistence.Repositories;
 

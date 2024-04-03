@@ -1,5 +1,6 @@
 ﻿using DocumentCrud.Application.Common;
-using DocumentCrud.Domain.Entities;
+using DocumentCrud.Domain.CreditAggregate;
+using DocumentCrud.Domain.InvoiceAggregate;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 

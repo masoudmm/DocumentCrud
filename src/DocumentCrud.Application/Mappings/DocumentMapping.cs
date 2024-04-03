@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DocumentCrud.Application.Dtos;
-using DocumentCrud.Domain.Entities;
+using DocumentCrud.Domain.CreditAggregate;
+using DocumentCrud.Domain.InvoiceAggregate;
 
 namespace DocumentCrud.Application.Features.Mappings;
 

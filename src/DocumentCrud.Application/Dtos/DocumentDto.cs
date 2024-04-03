@@ -1,4 +1,4 @@
-﻿using DocumentCrud.Domain.Entities;
+﻿using DocumentCrud.Domain.BaseEntities;
 
 namespace DocumentCrud.Application.Dtos;
 

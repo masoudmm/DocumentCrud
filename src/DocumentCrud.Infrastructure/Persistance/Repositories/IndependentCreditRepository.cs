@@ -1,5 +1,5 @@
 ﻿using DocumentCrud.Domain.Contracts.Persistence.Repositories;
-using DocumentCrud.Domain.Entities;
+using DocumentCrud.Domain.CreditAggregate;
 using Microsoft.EntityFrameworkCore;
 
 namespace DocumentCrud.Infrastructure.Persistance.Repositories;
