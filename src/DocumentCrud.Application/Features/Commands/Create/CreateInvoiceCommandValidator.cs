@@ -18,10 +18,6 @@ public class CreateInvoiceCommandValidator : AbstractValidator<CreateInvoiceComm
             .NotEmpty()
             .Length(10);
 
-        RuleFor(c => c.Status)
-            .NotNull()
-            .NotEmpty();
-
         RuleFor(c => c.TotalAmount)
             .NotNull()
             .NotEmpty()

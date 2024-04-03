@@ -5,7 +5,7 @@ using DocumentCrud.Application.Features.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DocumentCrud.Server.Extentions;
+namespace DocumentCrud.WebAPI.Extentions;
 
 public static class WebApplicationExtentions
 {
@@ -33,7 +33,7 @@ public static class WebApplicationExtentions
             CreateInvoiceCommand command,
             CancellationToken ct) =>
         sender.Send(command, ct))
-        .Produces<DocumentDto>(StatusCodes.Status201Created)
+        .Produces<DocumentDto>(statusCode: StatusCodes.Status201Created)
         .ProducesValidationProblem()
         .ProducesProblem(StatusCodes.Status500InternalServerError);
 

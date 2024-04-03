@@ -17,7 +17,6 @@ public class InvoiceTests
         // Act
         var invoice = Invoice.CreateNew(number,
             externalNumber,
-            status,
             totalAmount);
 
         // Assert
@@ -27,24 +26,6 @@ public class InvoiceTests
         Assert.Equal(status, invoice.Status);
         Assert.Equal(totalAmount, invoice.TotalAmount);
         Assert.Empty(invoice.DependentCreditNotes);
-    }
-
-
-    [Fact]
-    public void Create_New_Approved_Invoice_Should_Fail()
-    {
-        // Arrange
-        string number = "1234567890";
-        string externalNumber = "1234567inv1";
-        AccountingDocumentStatus status = AccountingDocumentStatus.Approved;
-        decimal totalAmount = 1000m;
-
-        // Act
-        // Assert
-        Assert.Throws<DomainException>(() => Invoice.CreateNew(number,
-            externalNumber,
-            status,
-            totalAmount));
     }
 
     [Fact]
@@ -58,7 +39,6 @@ public class InvoiceTests
 
         var invoice = Invoice.CreateNew(number,
             externalNumber,
-            status,
             totalAmount);
 
         decimal newTotalAmount = 1001m;
@@ -84,12 +64,10 @@ public class InvoiceTests
         // Arrange
         string number = "1234567890";
         string externalNumber = "1234567inv1";
-        AccountingDocumentStatus status = AccountingDocumentStatus.WaitingForApproval;
         decimal totalAmount = 1000m;
 
         var invoice = Invoice.CreateNew(number,
             externalNumber,
-            status,
             totalAmount);
 
         AccountingDocumentStatus newStatus = AccountingDocumentStatus.Approved;
@@ -118,7 +96,6 @@ public class InvoiceTests
         // Arrange
         var invoice = Invoice.CreateNew("1234567890",
             "1234567iv1",
-            AccountingDocumentStatus.WaitingForApproval,
             1000m);
 
         string creditNumber = "1234567891";
@@ -154,7 +131,6 @@ public class InvoiceTests
         // Arrange
         var invoice = Invoice.CreateNew("1234567890",
             "1234567iv1",
-            AccountingDocumentStatus.WaitingForApproval,
             1000m);
 
         string creditNumber = "1234567891";
@@ -198,7 +174,6 @@ public class InvoiceTests
         // Arrange
         var invoice = Invoice.CreateNew("1234567890",
             "1234567iv1",
-            AccountingDocumentStatus.WaitingForApproval,
             1000m);
 
         invoice.Edit(invoice.Number,
@@ -237,7 +212,6 @@ public class InvoiceTests
 
         var invoice = Invoice.CreateNew("1234567890",
             "1234567iv1",
-            AccountingDocumentStatus.WaitingForApproval,
             1000m);
 
         invoice.AddDependentCredit(creditNumber,
@@ -268,7 +242,6 @@ public class InvoiceTests
         // Arrange
         var invoice = Invoice.CreateNew("1234567890",
             "1234567iv1",
-            AccountingDocumentStatus.WaitingForApproval,
             1000m);
 
         string dependentNumber = "1234567891";

@@ -50,7 +50,6 @@ public class InvoiceRepositoryTests : IDisposable
         // Arrange
         var invoice = Invoice.CreateNew("1234567890",
             "123456inv1",
-            AccountingDocumentStatus.WaitingForApproval,
             200m);
 
         // Act
@@ -73,7 +72,6 @@ public class InvoiceRepositoryTests : IDisposable
         // Arrange
         var invoice = Invoice.CreateNew("1234567890",
             "123456inv1",
-            AccountingDocumentStatus.WaitingForApproval,
             200m);
 
         var creditNumber = "1234567890";
@@ -115,7 +113,6 @@ public class InvoiceRepositoryTests : IDisposable
         // Arrange
         var invoice = Invoice.CreateNew("1234567890",
             "123456inv1",
-            AccountingDocumentStatus.WaitingForApproval,
             200m);
 
         await _context.Invoices.AddAsync(invoice);
@@ -140,7 +137,6 @@ public class InvoiceRepositoryTests : IDisposable
         // Arrange
         var invoice = Invoice.CreateNew("1234567890",
                     "123456inv1",
-                    AccountingDocumentStatus.WaitingForApproval,
                     200m);
 
         await _repository.AddAsync(invoice);
@@ -159,7 +155,6 @@ public class InvoiceRepositoryTests : IDisposable
         // Arrange
         var invoice = Invoice.CreateNew("1234567890",
                     "123456inv1",
-                    AccountingDocumentStatus.WaitingForApproval,
                     200m);
 
         await _repository.AddAsync(invoice);
@@ -179,7 +174,6 @@ public class InvoiceRepositoryTests : IDisposable
         // Arrange
         var invoice = Invoice.CreateNew("1234567890",
             "123456inv1",
-            AccountingDocumentStatus.WaitingForApproval,
             200m);
 
         var creditNumber = "1234567890";
