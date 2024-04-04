@@ -45,7 +45,7 @@ public static class WebApplicationExtentions
         .ProducesValidationProblem()
         .ProducesProblem(StatusCodes.Status500InternalServerError);
 
-        app.MapPut("/api/Invoices/{id:int}/Put", (ISender sender,
+        app.MapPut("/api/Invoices/{id:int}", (ISender sender,
             EditInvoiceCommand command,
             CancellationToken ct) =>
         sender.Send(command, ct))

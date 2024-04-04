@@ -14,13 +14,21 @@ public class Program
         // Add services to the container.
         builder.Services.AddInfrastructure(builder.Configuration);
         builder.Services.AddApplication();
+        
+        builder.Services.AddCors(options =>
+        {
+            options.AddDefaultPolicy(builder => {
+                builder.SetIsOriginAllowed(a => a.Contains("localhost"));
+            });
+        });
 
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
 
         app.UseHttpsRedirection();
-
+        app.UseRouting();
+        app.UseCors();
         app.UseExceptionFilter();
         app.MapDocumentrEndPoints();
 
