@@ -1,9 +1,21 @@
 <div class="d-flex flex-row bd-highlight mb-9">
     <div class="p-2 w-100 bd-highlight">
-
+        <input type="hidden" class="form-control" [(ngModel)]="DocumentId">
         <div class="input-group mb-12">
-            <span class="input-group-text">Document Name</span>
+            <span class="input-group-text">Document Number</span>
             <input type="text" class="form-control" [(ngModel)]="DocumentNumber">
+        </div>
+        <div class="input-group mb-12">
+            <span class="input-group-text">Document ExternalNumber</span>
+            <input type="text" class="form-control" [(ngModel)]="DocumentExternalNumber">
+        </div>
+        <div class="input-group mb-12">
+            <span class="input-group-text">Document totalAmount</span>
+            <input type="text" class="form-control" [(ngModel)]="DocumentExternalNumber">
+        </div>
+        <div class="input-group mb-12">
+            <span class="input-group-text">Document status</span>
+            <input type="text" class="form-control" [(ngModel)]="DocumentExternalNumber">
         </div>
     </div>
 </div>

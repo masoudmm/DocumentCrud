@@ -20,7 +20,7 @@ export class ShowDocumentComponent implements OnInit {
   DocumentListWithoutFilter: any = [];
 
   ngOnInit(): void {
-    this.refreshDepList();
+    this.refreshDocList();
   }
 
   addClick() {
@@ -42,18 +42,18 @@ export class ShowDocumentComponent implements OnInit {
     if (confirm('Are you sure??')) {
       this.service.deleteDocument(item.DocumentNumber).subscribe(data => {
         alert(data.toString());
-        this.refreshDepList();
+        this.refreshDocList();
       })
     }
   }
 
   closeClick() {
     this.ActivateAddEditDocComp = false;
-    this.refreshDepList();
+    this.refreshDocList();
   }
 
 
-  refreshDepList() {
+  refreshDocList() {
     this.service.getDocuments().subscribe(data => {
       this.DocumentList = data;
       this.DocumentListWithoutFilter = data;
