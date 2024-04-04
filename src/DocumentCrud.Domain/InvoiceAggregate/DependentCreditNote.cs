@@ -38,4 +38,12 @@ public class DependentCreditNote : CreditDocument
         Status = status;
         TotalAmount = totalAmount;
     }
+
+    public void Delete()
+    {
+        if (Status == AccountingDocumentStatus.Approved)
+        {
+            throw new DomainException("Approved dependent credit note Cannot be deleted");
+        }
+    }
 }

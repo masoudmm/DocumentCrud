@@ -218,6 +218,40 @@ public class InvoiceTests
             newCreditTotalAmount));
     }
 
+    [Fact]
+    public void Approved_Invoice_Edit_Approved_Dependent_Credit_Should_Fail()
+    {
+        // Arrange
+        string creditNumber = "1234567891";
+        string externalCreditNumber = "1234567dc1";
+        AccountingDocumentStatus creditStatus = AccountingDocumentStatus.WaitingForApproval;
+        decimal creditTotalAmount = 200m;
+
+        var invoice = new Invoice("1234567890",
+            "1234567iv1",
+            1000m);
+
+        var credit = new DependentCreditNote(creditNumber,
+            externalCreditNumber,
+            creditTotalAmount);
+        invoice.AddDependentCredit(credit);
+
+        invoice.EditDependentCredit(credit.Id,
+            credit.Number,
+            credit.ExternalCreditNumber,
+            AccountingDocumentStatus.Approved,
+            credit.TotalAmount);
+        decimal newCreditTotalAmount = 201m;
+
+        // Act
+        // Assert
+        Assert.Throws<DomainException>(() => invoice.EditDependentCredit(0,
+            creditNumber,
+            externalCreditNumber,
+            creditStatus,
+            newCreditTotalAmount));
+    }
+
 
     [Fact]
     public void Invoice_Add_Exceeded_Dependent_Credit_Should_Fail()

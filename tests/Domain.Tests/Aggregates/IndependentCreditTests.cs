@@ -16,7 +16,7 @@ public class IndependentCreditTests
         decimal totalAmount = 1000m;
 
         // Act
-        var independentCredit = IndependentCreditNote.CreateNew(number,
+        var independentCredit = new IndependentCreditNote(number,
             externalNumber,
             totalAmount);
 
@@ -38,7 +38,7 @@ public class IndependentCreditTests
         AccountingDocumentStatus status = AccountingDocumentStatus.WaitingForApproval;
         decimal totalAmount = 1000m;
 
-        var independentCredit = IndependentCreditNote.CreateNew(number,
+        var independentCredit = new IndependentCreditNote(number,
             externalNumber,
             totalAmount);
 
@@ -67,7 +67,7 @@ public class IndependentCreditTests
         AccountingDocumentStatus status = AccountingDocumentStatus.WaitingForApproval;
         decimal totalAmount = 1000m;
 
-        var independentCredit = IndependentCreditNote.CreateNew(number,
+        var independentCredit = new IndependentCreditNote(number,
             externalNumber,
             totalAmount);
 

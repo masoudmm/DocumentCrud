@@ -24,7 +24,7 @@ namespace Application.Tests.Commands
                 "123456icr1",
                 100m);
 
-            var createdCredit = IndependentCreditNote.CreateNew(command.Number,
+            var createdCredit = new IndependentCreditNote(command.Number,
                 command.ExternalCreditNumber,
                 command.TotalAmount);
 

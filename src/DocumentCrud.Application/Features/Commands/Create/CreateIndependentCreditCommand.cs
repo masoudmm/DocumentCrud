@@ -28,7 +28,7 @@ public class CreateIndependentCreditCommandHandler : IRequestHandler<CreateIndep
     {
         ArgumentNullException.ThrowIfNull(request, nameof(request));
 
-        var newCredit = IndependentCreditNote.CreateNew(request.Number,
+        var newCredit = new IndependentCreditNote(request.Number,
             request.ExternalCreditNumber,
             request.TotalAmount);
 

@@ -76,7 +76,7 @@ public class Invoice : AccountingDocument, IEntity, IAggregateRoot
             throw new DomainException("Approved invoice Cannot be edited");
         }
 
-        if (creditStatus == AccountingDocumentStatus.Approved)
+        if (Status == AccountingDocumentStatus.Approved)
         {
             throw new DomainException("can't edit dependentCredit after approve");
         }
@@ -116,21 +116,11 @@ public class Invoice : AccountingDocument, IEntity, IAggregateRoot
 
     public void Delete()
     {
+        if (Status == AccountingDocumentStatus.Approved)
+        {
+            throw new DomainException("Approved invoice Cannot be deleted");
+        }
+
         _dependentCreditNotes.Clear();
     }
-
-    //public static Invoice CreateNew(string number,
-    //    string externalNumber,
-    //    decimal totalAmount)
-    //{
-    //    if (number.Equals(externalNumber,
-    //        StringComparison.OrdinalIgnoreCase))
-    //    {
-    //        throw new DomainException("invoice number cannot be the same as externalInvoiceNumber");
-    //    }
-
-    //    return new Invoice(number,
-    //        externalNumber,
-    //        totalAmount);
-    //}
 }
