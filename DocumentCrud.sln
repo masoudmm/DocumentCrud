@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Tests", "tests\Domai
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Tests", "tests\Infrastructure.Tests\Infrastructure.Tests.csproj", "{8F93B5FC-CA20-4C0E-B1BF-017F8AE2A715}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI.Tests", "tests\WebAPI.Tests\WebAPI.Tests.csproj", "{FF85C434-AAE4-4752-A4DA-B3B8B8429A13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI.Tests", "tests\WebAPI.Tests\WebAPI.Tests.csproj", "{FF85C434-AAE4-4752-A4DA-B3B8B8429A13}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "DocumentCrud.UI", "src\DocumentCrud.UI\DocumentCrud.UI.esproj", "{94983FC1-72C7-4EC3-9432-AD732F76E7B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,12 @@ Global
 		{FF85C434-AAE4-4752-A4DA-B3B8B8429A13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF85C434-AAE4-4752-A4DA-B3B8B8429A13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF85C434-AAE4-4752-A4DA-B3B8B8429A13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94983FC1-72C7-4EC3-9432-AD732F76E7B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94983FC1-72C7-4EC3-9432-AD732F76E7B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94983FC1-72C7-4EC3-9432-AD732F76E7B9}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{94983FC1-72C7-4EC3-9432-AD732F76E7B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94983FC1-72C7-4EC3-9432-AD732F76E7B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94983FC1-72C7-4EC3-9432-AD732F76E7B9}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
