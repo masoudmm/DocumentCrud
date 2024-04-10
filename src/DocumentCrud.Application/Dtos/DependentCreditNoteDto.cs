@@ -4,13 +4,13 @@ namespace DocumentCrud.Application.Dtos;
 
 public class DependentCreditNoteDto
 {
-    public int Id { get; private set; }
+    public int Id { get; set; }
 
-    public string Number { get; protected set; }
+    public string Number { get; set; }
 
-    public string ExternalCreditNumber { get; protected set; }
+    public string ExternalCreditNumber { get; set; }
 
-    public AccountingDocumentStatus Status { get; protected set; }
+    public AccountingDocumentStatus Status { get; set; }
 
-    public decimal TotalAmount { get; protected set; }
+    public decimal TotalAmount { get; set; }
 }

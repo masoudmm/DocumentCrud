@@ -1,16 +1,12 @@
-﻿using FluentValidation;
+﻿using DocumentCrud.Application.Dtos;
+using FluentValidation;
 
-namespace DocumentCrud.Application.Features.Commands.Edit;
+namespace DocumentCrud.Application.Features.Commands.Create;
 
-public class EditIndependentCreditCommandValidator : AbstractValidator<EditIndependentCreditCommand>
+public class DependentCreditDtoValidator : AbstractValidator<DependentCreditNoteDto>
 {
-    public EditIndependentCreditCommandValidator()
+    public DependentCreditDtoValidator()
     {
-        RuleFor(c => c.Id)
-            .NotNull()
-            .NotEmpty()
-            .GreaterThan(0);
-
         RuleFor(c => c.Number)
             .NotNull()
             .NotEmpty()
@@ -22,9 +18,6 @@ public class EditIndependentCreditCommandValidator : AbstractValidator<EditIndep
             .NotNull()
             .NotEmpty()
             .Length(10);
-
-        RuleFor(c => c.Status)
-            .NotNull();
 
         RuleFor(c => c.TotalAmount)
             .NotNull()

@@ -3,6 +3,7 @@ using DocumentCrud.Application.Dtos;
 using DocumentCrud.Domain.Contracts.Persistence;
 using DocumentCrud.Domain.InvoiceAggregate;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 
 namespace DocumentCrud.Application.Features.Commands.Create;
 

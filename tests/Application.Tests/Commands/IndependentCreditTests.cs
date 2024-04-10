@@ -13,7 +13,7 @@ namespace Application.Tests.Commands
     public class IndependentCreditTests
     {
         [Fact]
-        public async Task Create_Independent_Credit_Command_Should_Succeed()
+        public async Task Create_Command_Should_Succeed()
         {
             // Arrange
             var mockMapper = new Mock<IMapper>();
@@ -50,6 +50,7 @@ namespace Application.Tests.Commands
                 ExternalNumber = command.ExternalCreditNumber,
                 TotalAmount = command.TotalAmount,
             };
+
             mockMapper.Setup(mapper => mapper.Map<DocumentDto>(It.IsAny<IndependentCreditNote>()))
                 .Returns(dto);
 
@@ -65,7 +66,7 @@ namespace Application.Tests.Commands
         }
 
         [Fact]
-        public async Task Edit_Independent_Credit_Command_Should_Succeed()
+        public async Task Edit_Command_Should_Succeed()
         {
             // Arrange
             var mockMapper = new Mock<IMapper>();

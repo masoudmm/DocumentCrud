@@ -121,6 +121,9 @@ public class Invoice : AccountingDocument, IEntity, IAggregateRoot
             throw new DomainException("Approved invoice Cannot be deleted");
         }
 
-        _dependentCreditNotes.Clear();
+        if (_dependentCreditNotes is not null && _dependentCreditNotes.Any())
+        {
+            _dependentCreditNotes.Clear();
+        }
     }
 }

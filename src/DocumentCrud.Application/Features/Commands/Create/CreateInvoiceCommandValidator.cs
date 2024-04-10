@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using DocumentCrud.Application.Dtos;
+using FluentValidation;
 
 namespace DocumentCrud.Application.Features.Commands.Create;
 
@@ -22,5 +23,8 @@ public class CreateInvoiceCommandValidator : AbstractValidator<CreateInvoiceComm
             .NotNull()
             .NotEmpty()
             .GreaterThan(0);
+
+        RuleForEach(c => c.DependentCreditNotes)
+            .SetValidator(new DependentCreditDtoValidator());
     }
 }

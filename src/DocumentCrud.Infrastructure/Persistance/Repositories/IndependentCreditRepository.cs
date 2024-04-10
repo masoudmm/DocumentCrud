@@ -1,12 +1,11 @@
 ﻿using DocumentCrud.Application.Exceptions;
 using DocumentCrud.Domain.Contracts.Persistence.Repositories;
 using DocumentCrud.Domain.CreditAggregate;
-using DocumentCrud.Domain.InvoiceAggregate;
 using Microsoft.EntityFrameworkCore;
 
 namespace DocumentCrud.Infrastructure.Persistance.Repositories;
 
-internal class IndependentCreditRepository : IIndependentCreditRepository
+public class IndependentCreditRepository : IIndependentCreditRepository
 {
     private readonly ApplicationDbContext _context;
 
@@ -30,7 +29,7 @@ internal class IndependentCreditRepository : IIndependentCreditRepository
     public async Task<IndependentCreditNote> GetByIdAsync(int id)
     {
         var credit = await _context.IndependentCreditNotes
-            .FirstAsync(i => i.Id == id);
+            .FirstOrDefaultAsync(i => i.Id == id);
 
         if (credit is null)
         {
