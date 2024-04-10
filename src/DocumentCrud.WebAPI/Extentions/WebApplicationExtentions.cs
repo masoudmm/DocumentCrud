@@ -11,69 +11,81 @@ public static class WebApplicationExtentions
 {
     public static void MapDocumentrEndPoints(this WebApplication app)
     {
+        #region Get Endpoint Mappings
+
         app.MapGet("/api/Documents", (ISender sender,
                 CancellationToken ct) =>
             sender.Send(new GetAllDocumentsQuery(), ct))
-                .Produces<DocumentDto>(StatusCodes.Status200OK)
-                .ProducesProblem(StatusCodes.Status400BadRequest);
+                .WithName("GetAllDocuments")
+                .ProducesGet<DocumentDto[]>();
 
         app.MapGet("/api/Invoices/{id:int}", (ISender sender,
-            [FromRoute] int id,
-            CancellationToken ct) => sender.Send(new GetInvoiceByIdQuery(id), ct))
-        .Produces<DocumentDto>(StatusCodes.Status200OK)
-        .ProducesProblem(StatusCodes.Status500InternalServerError);
+                [FromRoute] int id,
+                CancellationToken ct) =>
+            sender.Send(new GetInvoiceByIdQuery(id), ct))
+                .WithName("GetInvoiceById")
+                .ProducesGet<DocumentDto>();
 
         app.MapGet("/api/IndependentCredits/{id:int}", (ISender sender,
-            [FromRoute] int id,
-            CancellationToken ct) => sender.Send(new GetInvoiceByIdQuery(id), ct))
-        .Produces<DocumentDto>(StatusCodes.Status200OK)
-        .ProducesProblem(StatusCodes.Status500InternalServerError);
+                [FromRoute] int id,
+                CancellationToken ct) =>
+            sender.Send(new GetIndependentCreditByIdQuery(id), ct))
+                .WithName("GetIndependentCreditById")
+                .ProducesGet<DocumentDto>();
+
+        #endregion
+
+        #region Post Endpoint Mappings
 
         app.MapPost("/api/Invoices", (ISender sender,
-            CreateInvoiceCommand command,
-            CancellationToken ct) =>
+            CreateInvoiceCommand command, CancellationToken ct) =>
         sender.Send(command, ct))
-        .Produces<DocumentDto>(statusCode: StatusCodes.Status201Created)
-        .ProducesValidationProblem()
-        .ProducesProblem(StatusCodes.Status500InternalServerError);
+            .WithName("CreateInvoice")
+            .ProducesPost();
 
         app.MapPost("/api/IndependentCredits", (ISender sender,
-            CreateIndependentCreditCommand command,
-            CancellationToken ct) =>
+            CreateIndependentCreditCommand command, CancellationToken ct) =>
         sender.Send(command, ct))
-        .Produces<DocumentDto>(StatusCodes.Status201Created)
-        .ProducesValidationProblem()
-        .ProducesProblem(StatusCodes.Status500InternalServerError);
+            .WithName("CreateIndependentCredit")
+            .ProducesPost();
 
-        app.MapPut("/api/Invoices/{id:int}", (ISender sender,
-            EditInvoiceCommand command,
-            CancellationToken ct) =>
+        #endregion
+
+        #region Put Endpoint Mappings
+
+        app.MapPut("/api/Invoices/{id:int}", (ISender sender, 
+            EditInvoiceCommand command, 
+            CancellationToken ct) => 
         sender.Send(command, ct))
-        .Produces<DocumentDto>(StatusCodes.Status200OK)
-        .ProducesValidationProblem()
-        .ProducesProblem(StatusCodes.Status500InternalServerError);
+            .WithName("EditInvoice")
+            .ProducesPut();
 
         app.MapPut("/api/IndependentCredits/{id:int}", (ISender sender,
             EditIndependentCreditCommand command,
             CancellationToken ct) =>
         sender.Send(command, ct))
-        .Produces<DocumentDto>(StatusCodes.Status200OK)
-        .ProducesValidationProblem()
-        .ProducesProblem(StatusCodes.Status500InternalServerError);
+            .WithName("EditIndependentCredit")
+            .ProducesPut();
+
+        #endregion
+
+        #region Delete Endpoint Mappings
 
         app.MapDelete("/api/Invoices/{id:int}", (ISender sender,
             [FromRoute] int id,
             CancellationToken ct) =>
         sender.Send(new DeleteInvoiceCommand(id), ct))
-        .Produces<int>(StatusCodes.Status200OK)
-        .ProducesProblem(StatusCodes.Status500InternalServerError);
+            .WithName("DeleteInvoice")
+            .ProducesDelete();
 
         app.MapDelete("/api/IndependentCredits/{id:int}", (ISender sender,
             [FromRoute] int id,
             CancellationToken ct) =>
         sender.Send(new DeleteIndependentCreditCommand(id), ct))
-        .Produces<int>(StatusCodes.Status200OK)
-        .ProducesProblem(StatusCodes.Status500InternalServerError);
+            .WithName("DeleteIndependentCredit")
+            .ProducesDelete();
+
+        #endregion
     }
 }
 

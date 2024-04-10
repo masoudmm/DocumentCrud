@@ -24,8 +24,7 @@ public class EditInvoiceCommandValidator : AbstractValidator<EditInvoiceCommand>
             .Length(10);
 
         RuleFor(c => c.Status)
-            .NotNull()
-            .NotEmpty();
+            .NotNull();
 
         RuleFor(c => c.TotalAmount)
             .NotNull()

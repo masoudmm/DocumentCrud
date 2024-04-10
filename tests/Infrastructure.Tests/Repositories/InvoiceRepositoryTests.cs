@@ -45,7 +45,7 @@ public class InvoiceRepositoryTests : IDisposable
     }
 
     [Fact]
-    public async Task AddAsync_ShouldAddInvoice_Without_Dependent_Credit()
+    public async Task AddAsync_Should_Succeed()
     {
         // Arrange
         var invoice = new Invoice("1234567890",
@@ -67,7 +67,7 @@ public class InvoiceRepositoryTests : IDisposable
     }
 
     [Fact]
-    public async Task AddAsync_ShouldAddInvoice_With_Dependent_Credit()
+    public async Task AddAsync_With_Dependent_Credit_Shoudl_Succeed()
     {
         // Arrange
         var invoice = new Invoice("1234567890",
@@ -106,7 +106,7 @@ public class InvoiceRepositoryTests : IDisposable
     }
 
     [Fact]
-    public async Task GetByIdAsync_ShouldReturnInvoice()
+    public async Task GetByIdAsync_Should_Succeed()
     {
         // Arrange
         var invoice = new Invoice("1234567890",
@@ -148,7 +148,7 @@ public class InvoiceRepositoryTests : IDisposable
     }
 
     [Fact]
-    public async Task Get_Removed_Invoice_Should_Fail()
+    public async Task Removed_Invoice_Should_Fail()
     {
         // Arrange
         var invoice = new Invoice("1234567890",
