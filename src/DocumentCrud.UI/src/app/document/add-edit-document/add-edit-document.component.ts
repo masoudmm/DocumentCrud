@@ -16,6 +16,7 @@ export class AddEditDocumentComponent implements OnInit {
   DocumentExternalNumber = "";
   DocumentTotalAmount = "";
   DocumentStatus = "";
+  DocumentType = 0; 
 
   ngOnInit(): void {
 
@@ -24,6 +25,7 @@ export class AddEditDocumentComponent implements OnInit {
     this.DocumentExternalNumber = this.doc.DocumentExternalNumber;
     this.DocumentTotalAmount = this.doc.DocumentTotalAmount;
     this.DocumentStatus = this.doc.DocumentStatus;
+    this.DocumentType = this.doc.DocumentType;
   }
 
   addDocument() {
@@ -42,8 +44,10 @@ export class AddEditDocumentComponent implements OnInit {
       DocumentNumber: this.DocumentNumber,
       DocumentExternalNumber: this.DocumentExternalNumber,
       DocumentTotalAmount: this.DocumentTotalAmount,
-      DocumentStatus: this.DocumentStatus
+      DocumentStatus: this.DocumentStatus,
+      DocumentType: this.DocumentType
     };
+
     this.service.editDocument(doc).subscribe(res => {
       alert(res.toString());
     });

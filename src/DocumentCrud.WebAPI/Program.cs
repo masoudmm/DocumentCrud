@@ -18,7 +18,7 @@ public class Program
         builder.Services.AddCors(options =>
         {
             options.AddDefaultPolicy(builder => {
-                builder.SetIsOriginAllowed(a => a.Contains("localhost"));
+                builder.SetIsOriginAllowed(a => true);
             });
         });
 
@@ -29,7 +29,7 @@ public class Program
 
         // Configure the HTTP request pipeline.
 
-        app.UseHttpsRedirection();
+        //app.UseHttpsRedirection();
         app.UseRouting();
         app.UseCors();
         app.UseExceptionFilter();

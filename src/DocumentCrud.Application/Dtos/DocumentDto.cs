@@ -13,7 +13,7 @@ public class DocumentDto
 
     public decimal TotalAmount { get; set; }
 
-    public DocumentType documentType { get; set; }
+    public DocumentType Type { get; set; }
 
     public IReadOnlyList<DependentCreditNoteDto> DependentCreditNoteDtos { get; set; }
 

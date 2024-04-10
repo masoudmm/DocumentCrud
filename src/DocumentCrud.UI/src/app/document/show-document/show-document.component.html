@@ -40,6 +40,9 @@
             <th>
                 Document Status
             </th>
+            <th>
+                Document Type
+            </th>
             <th>Options</th>
         </tr>
     </thead>
@@ -50,6 +53,7 @@
             <td>{{dataItem.externalNumber}}</td>
             <td>{{dataItem.totalAmount}}</td>
             <td>{{dataItem.status}}</td>
+            <td>{{dataItem.type}}</td>
             <td>
                 <button type="button" class="btn btn-light mr-1" data-bs-toggle="modal" data-bs-target="#exampleModal"
                         (click)="editClick(dataItem)" data-backdrop="static" data-keyboard="false">
